@@ -122,7 +122,7 @@ func (c *Handler) HandleTokenEndpointRequest(ctx context.Context, request fosite
 	for _, audience := range claims.Audience {
 		if c.Config.GetAudienceStrategy(ctx)(request.GetClient().GetAudience(), []string{audience}) == nil {
 			request.GrantAudience(audience)
-		}		
+		}
 	}
 
 	session, err := c.getSessionFromRequest(request)
