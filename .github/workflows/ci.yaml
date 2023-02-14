@@ -30,7 +30,7 @@ jobs:
         run: ./test/conformance/start.sh
       - name: Run tests
         run: ./test/conformance/test.sh -v -short -parallel 16
-        
+
   release:
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +47,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: .docker/Dockerfile-alpine
+          file: ./.docker/Dockerfile-alpine
           push: true
           tags: |
             ghcr.io/sb1finans/hydra:latest-alpine
