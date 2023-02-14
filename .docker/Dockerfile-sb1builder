@@ -7,8 +7,8 @@ RUN mkdir -p ./internal/httpclient
 RUN mkdir -p ./internal/fosite
 
 COPY go.mod go.sum ./
-COPY internal/httpclient/go.* ./internal/httpclient
-COPY internal/fosite/go.* ./internal/fosite
+COPY internal/httpclient/go.* ./internal/httpclient/
+COPY internal/fosite/go.* ./internal/fosite/
 
 ENV GO111MODULE on
 ENV CGO_ENABLED 1
