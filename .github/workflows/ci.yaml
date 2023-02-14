@@ -179,6 +179,7 @@ jobs:
       - run: ./test/e2e/circle-ci.bash ${{ matrix.database }} ${{ matrix.args }}
 
   release:
+    runs-on: ubuntu-latest
     steps:
       # Login to Docker
       - name: Login to GitHub Container Registry
