@@ -179,23 +179,28 @@ jobs:
       - run: ./test/e2e/circle-ci.bash ${{ matrix.database }} ${{ matrix.args }}
 
   # Login to Docker
-  - name: Login to GitHub Container Registry
-    uses: docker/login-action@v1
-    with:
-      registry: ghcr.io
-      username: ${{ github.actor }}
-      password: ${{ secrets.GITHUB_TOKEN }}
+  release:
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build docker image
+        uses: docker
+
   
   # Build docker images
-  - name: Build docker image
-    run: docker
-    with:
-      context: .
-      file: .docker/Dockerfile-alpine
-      push: true
-      tags: |
-        ghcr.io/sb1finans/hydra:latest-alpine
-        ghcr.io/sb1finans/hydra:${{ github.sha }}
+      - name: Build docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: .docker/Dockerfile-alpine
+          push: true
+          tags: |
+            ghcr.io/sb1finans/hydra:latest-alpine
+            ghcr.io/sb1finans/hydra:${{ github.sha }}
 
 
 
