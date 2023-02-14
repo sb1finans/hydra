@@ -178,20 +178,17 @@ jobs:
           key: ${{ needs.sdk-generate.outputs.sdk-cache-key }}
       - run: ./test/e2e/circle-ci.bash ${{ matrix.database }} ${{ matrix.args }}
 
-  # Login to Docker
   release:
     steps:
+      # Login to Docker
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build docker image
-        uses: docker
-
   
-  # Build docker images
+      # Build docker images
       - name: Build docker image
         uses: docker/build-push-action@v2
         with:
