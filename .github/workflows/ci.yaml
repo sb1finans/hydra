@@ -32,6 +32,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
       - run: |
           docker build -f .docker/Dockerfile-sb1builder -t ghcr.io/sb1finans/hydra:latest-alpine .
         name: Build
